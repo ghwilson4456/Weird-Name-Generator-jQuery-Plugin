@@ -4,9 +4,10 @@ Copyright 2011 Gary H. Wilson [http://www.jarofcode.com]
 
 Weird Name Generator (WNG) is a jQuery plugin for generating random names. This is not a dictionary of randomly chosen names, but a generator that pieces together a name from phonetic rules of vowel and consonant combinations.
 
-To get started -- checkout http://jarofcode.com/weird-name-generator-jquery-plugin/ or https://github.com/ghwilson4456/Weird-Name-Generator-jQuery-Plugin
 * [WNG Homepage](http://jarofcode.com/weird-name-generator-jquery-plugin/)
+
 * [GitHub Repository](https://github.com/ghwilson4456/Weird-Name-Generator-jQuery-Plugin)
+
 * [jQuery Plugin Page](http://plugins.jquery.com/project/wng)
 
 
