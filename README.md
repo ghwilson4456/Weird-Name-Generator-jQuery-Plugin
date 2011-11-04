@@ -11,7 +11,7 @@ Weird Name Generator (WNG) is a jQuery plugin for generating random names. This 
 * [jQuery Plugin Page](http://plugins.jquery.com/project/wng)
 
 
-## Dependencies (included in this repository)
+## Dependencies (not included in this repository)
 
 - [jQuery](http://jquery.com)
 
