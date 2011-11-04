@@ -7,10 +7,77 @@
 
 	<title>Example 1 :: Weird Name Generater</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="../src/jquery.weirdnamegenerator-0.1.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../src/jquery.weirdnamegenerator-0.2.0.js" type="text/javascript" charset="utf-8"></script>
 	<style>
 		#wng-wrapper h1,#wng-wrapper ul,#wng-wrapper li,#wng-wrapper label{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline}#wng-wrapper{line-height:1}ul{list-style:none}
-		#wng-wrapper{margin:20px auto 0 auto;padding:10px;width:340px;font-family:'Lucida Grande',Verdana,Helvetica,sans-serif;font-size:12px;border:1px solid #999}#wng-wrapper h1{margin-bottom:15px;padding-bottom:10px;font-size:18px;font-weight:bold;border-bottom:1px dotted #ccc}#wng-wrapper label{display:block;margin-bottom:5px;font-size:10px;font-weight:bold}#wng-wrapper .options{margin-bottom:20px;border-bottom:1px dotted #ccc}#wng-wrapper .col{float:left;padding-bottom:15px;width:33%}#wng-wrapper .options .last{width:34%}#wng-wrapper .options:after{clear:both;content:".";display:block;height:0;visibility:hidden;font-size:0}#wng-wrapper .options:before,#wng-wrapper .options:after{content:"";display:table}#wng-wrapper .options:after{clear:both}#wng-wrapper .options{zoom:1}#wng-wrapper .action{clear:both;float:left;width:33%}#wng-wrapper .resultWrapper{overflow:hidden}#wng-wrapper .resultWrapper li{font-size:14px;line-height:20px}
+		#wng-wrapper {
+			margin: 20px auto 0 auto;
+			padding: 10px;
+			width: 340px;
+			font-family: 'Lucida Grande',Verdana,Helvetica,sans-serif;
+			font-size: 12px;
+			border: 1px solid #999
+		}
+		#wng-wrapper h1 {
+			margin-bottom: 15px;
+			padding-bottom: 10px;
+			font-size: 18px;
+			font-weight: bold;
+			border-bottom: 1px dotted #ccc
+		}
+		#wng-wrapper label {
+			display: block;
+			margin-bottom: 5px;
+			font-size: 10px;
+			font-weight: bold
+		}
+		#wng-wrapper .options {
+			margin-bottom: 20px;
+			border-bottom: 1px dotted #ccc
+		}
+		#wng-wrapper .col {
+			float: left;
+			padding-bottom: 15px;
+			width: 33%
+		}
+		#wng-wrapper .options .last {
+			width: 34%
+		}
+		#wng-wrapper .options:after {
+			clear: both;
+			content: ".";
+			display: block;
+			height: 0;
+			visibility: hidden;
+			font-size: 0
+		}
+		#wng-wrapper .options:before,#wng-wrapper .options:after {
+			content: "";
+			display: table
+		}
+		#wng-wrapper .options:after {
+			clear: both
+		}
+		#wng-wrapper .options {
+			zoom: 1
+		}
+		#wng-wrapper .action {
+			clear: both;
+			float: left;
+			width: 33%
+		}
+		#wng-wrapper .action button {
+			margin-bottom: 10px;
+			width: 100px;
+		}
+		#wng-wrapper .resultWrapper {
+			overflow: hidden;
+			font-family: Georgia,serif;
+		}
+		#wng-wrapper .resultWrapper li {
+			font-size: 15px;
+			line-height: 22px
+		}
 	</style>
 </head>
 
@@ -26,8 +93,8 @@
 	
 			<select id="size">
 				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5" selected>5</option>
+				<option value="4" selected>4</option>
+				<option value="5">5</option>
 				<option value="6">6</option>
 				<option value="7">7</option>
 				<option value="8">8</option>
@@ -62,6 +129,7 @@
 	
 	<div class="action">
 		<button id="refresh">Refresh</button>
+		<button id="convert">Leet Speak [1]</button>
 	</div>
 	
 	<div class="resultWrapper">
@@ -81,22 +149,41 @@
 		
 </div>
 		
-	<script type="text/javascript">
-		$(document).ready(function() {
-			
+<script type="text/javascript">
+	$(document).ready(function() {
+		refresh();
+		
+		$('#refresh').click(function() {
 			refresh();
-			
-			$('#refresh').click(function(){
-				refresh();
-			});
 		});
 		
-		function refresh() {
-			$('li.wn').each(function(){
-				$(this).html($.wng.create({"size":$('#size').val(),"sound":$('#sound').val(),"leet":$('#leet').val()}));
-			});
-		}
-	</script>
+		$('#convert').click(function() {
+			convert();
+		});
+	});
+	
+	function refresh() {
+		var wngPlugin = new $.wng(
+			{
+				"size"	: $('#size').val(),
+				"sound"	: $('#sound').val(),
+				"leet"	: $('#leet').val()
+			}
+		);
+		
+		$('li.wn').each(function() {
+			$(this).html( wngPlugin.generate() );
+		});
+	}
+	
+	function convert() {
+		var wngPlugin = new $.wng();
+		
+		$('li.wn').each(function() {
+			$(this).html( wngPlugin.leet($(this).html(), 1) );
+		});
+	}
+</script>
 	
 </body>
 </html>
