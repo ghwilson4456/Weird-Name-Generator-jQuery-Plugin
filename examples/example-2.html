@@ -39,7 +39,7 @@
 			zoom: 1;
 		}
 		#wng-wrapper .options .last {
-			width: 34%
+			width: 20%
 		}
 		#wng-wrapper .options:after {
 			clear: both;
@@ -59,9 +59,10 @@
 		#wng-wrapper .col {
 			float: left;
 			padding-bottom: 10px;
-			width: 33%
+			width: 40%
 		}
-		#wng-wrapper .col select {
+		#wng-wrapper .col select,
+		#wng-wrapper .col input {
 			width: 90%;
 		}
 		#wng-wrapper .options .action {
@@ -89,69 +90,28 @@
 	
 	<div class="options">
 		<div class="col first">
-			<label>Name Size:</label>
-	
-			<select id="size">
-				<option value="3">3</option>
-				<option value="4" selected>4</option>
-				<option value="5">5</option>
-				<option value="6">6</option>
-			</select>
+			<label>String:</label>
+			<input id="string" type="text" name="string" value="leet"/>
 		</div>
 	
 		<div class="col">
-			<label>Sound Type:</label>
-	
-			<select id="sound">
-				<option value="random">random</option>
-				<option value="hard">hard</option>
-				<option value="soft">soft</option>
-			</select>
-		</div>
-	
-		<div class="col last">
 			<label>Leet-Speak Level:</label>
 
 			<select id="leet">
-				<option value="">none</option>
 				<option value="vowels">vowels</option>
 				<option value="basic">basic</option>
 				<option value="extended">extended</option>
 			</select>
 		</div>
 		
-		<div class="action">
-			<button id="generate">Generate Weird Names</button>
+		<div class="action col last">
+			<button id="convert">Convert</button>
 		</div>
 	</div>
 	
 	<div class="resultWrapper">
-		<div class="col">
-			<ul>
-				<li class="wn">test 1</li>
-				<li class="wn">test 2</li>
-				<li class="wn">test 3</li>
-				<li class="wn">test 4</li>
-				<li class="wn">test 5</li>
-			</ul>
-		</div>
-		<div class="col">
-			<ul>
-				<li class="wn">test 6</li>
-				<li class="wn">test 7</li>
-				<li class="wn">test 8</li>
-				<li class="wn">test 9</li>
-				<li class="wn">test 10</li>
-			</ul>
-		</div>
-		<div class="col">
-			<ul>
-				<li class="wn">test 11</li>
-				<li class="wn">test 12</li>
-				<li class="wn">test 13</li>
-				<li class="wn">test 14</li>
-				<li class="wn">test 15</li>
-			</ul>
+		<div class="wn">
+				l33t
 		</div>
 	</div>
 		
@@ -159,37 +119,14 @@
 		
 <script type="text/javascript">
 	$(document).ready(function() {
-		generate();
-		
-		$('#generate').click(function() {
-			generate();
-		});
-		
 		$('#convert').click(function() {
 			convert();
 		});
 	});
 	
-	function generate() {
-		var wngPlugin = new $.wng(
-			{
-				"size"	: $('#size').val(),
-				"sound"	: $('#sound').val(),
-				"leet"	: $('#leet').val()
-			}
-		);
-		
-		$('li.wn').each(function() {
-			$(this).html( wngPlugin.generate() );
-		});
-	}
-	
 	function convert() {
 		var wngPlugin = new $.wng();
-		
-		$('li.wn').each(function() {
-			$(this).html( wngPlugin.leet($(this).html(), "basic") );
-		});
+		$(".wn").html( wngPlugin.leet($("#string").val(), $("#leet").val()) );
 	}
 </script>
 	

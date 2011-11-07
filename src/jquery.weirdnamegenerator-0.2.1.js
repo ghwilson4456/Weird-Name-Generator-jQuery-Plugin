@@ -20,7 +20,7 @@
 		var consonantsHardStart = ['B','Bl','Br','Chr','Cr','D','Dr','G','Gr','K','Kr','P','Pr','Sp','St','T','Tr'];
 		var consonantsSoftStart = ['C','Ch','F','H','J','L','M','N','Ph','Qu','R','S','Sh','Sm','Sn','Th','V','W','X','Y','Z'];
 		
-		var consonantsHardMid = consonantsHardStart.slice(0).concat(['hm','lbl','mbl','rb','rbl']);
+		var consonantsHardMid = consonantsHardStart.slice(0).concat(['hm','mbl','rb','rbl']);
 		var consonantsSoftMid = consonantsSoftStart.slice(0).concat(['sm','sn','sr']);
 		
 		var consonantsHardEnd = ['b','c','ck','d','g','k','nd','p','rt','sp','st','t'];
@@ -111,64 +111,38 @@
 		}
 
 		plugin.leet = function(name, type) {
-			type = Number(type);
+			type = type.toLowerCase();
 			
 			var leetObj = {
-				numbers : {
-					vowels : {
-						a : "4",
-						e : "3",
-						i : "1",
-						o : "0"
-					},
-					
-					consonants : {
-						l : "1",
-						r : "2",
-						z : "2",
-						s : "5",
-						b : "6",
-						g : "6",
-						t : "7",
-						l : "7",
-						b : "8",
-						g : "9",
-						q : "9"
-					}
+				vowels : {
+					a : "4",
+					e : "3",
+					i : "1",
+					o : "0"
 				},
-
-				symbols : {
-					vowels : {
-						a: ["4","/-\\","/_\\","@","/\\"],
-						e: ["3"],
-						i: ["1","|"],
-						o: ["0","()","[]","{}"],
-						u: ["|_|","\\_\\","/_/","\\_/","(_)"]
-					},
-					
-					consonants : {
-						b: ["8,|3","13","|}","|:","|8","18","6","|B"],
-						c: ["<","{","[","("],
-						d: ["|>","|)","|}","|]"],
-						f: ["|=","ph","|#"],
-						g: ["[","-","[+","6"],
-						h: ["|-|","[-]","{-}","|=|","[=]","{=}"],
-						j: ["_|","_/","_7","_)"],
-						k: ["|<","1<"],
-						l: ["|_","|,"],
-						m: ["|\\/|","^^","/\\/\\","[]\\/][","[]V[]","][\\\\//][","//.",".\\\\","N\\"],
-						n: ["|\\|","/\\/","/V","][\\\\]["],
-						p: ["|o","|O","|>","|*","|°","|D"],
-						q: ["O_","9","(,)"],
-						r: ["|2","12",".-","|^"],
-						s: ["5","$","§"],
-						t: ["7","+","7`","'|'"],
-						v: ["\\/"],
-						w: ["\\/\\/","(/\\)","\\^/","|/\\|","\\X/","][1][","\\\\'","'//"],
-						x: ["%","*","><","}{",")("],
-						y: ["`/","¥"],
-						z: ["2","7_",">_"]
-					}
+				
+				basic : {
+					a : "4",
+					e : "3",
+					i : "1",
+					o : "0",
+					s : "5",
+					t : "7"
+				},
+				
+				extended : {
+					a : "4",
+					b : "8",
+					e : "3",
+					g : "9",
+					i : "1",
+					o : "0",
+					p : "P",
+					q : "q",
+					r : "R",
+					s : "5",
+					t : "7",
+					z : "2"
 				}
 			}
 			
@@ -178,52 +152,8 @@
 			for (var i = 0; i < leetName.length; i++) {
 				currLetter = leetName[i].toLowerCase();
 				
-				switch (type) {
-					case 1 :
-					if (leetObj.numbers.vowels[currLetter]) {
-						leetName[i] = leetObj.numbers.vowels[currLetter];
-					}
-					break;
-					
-					case 2 :
-					if (i > 0) {
-						if (leetObj.numbers.vowels[currLetter]) {
-							leetName[i] = leetObj.numbers.vowels[currLetter];
-						}
-					}
-					break;
-					
-					case 3 :
-					if (i > 0) {
-						if (leetObj.numbers.vowels[currLetter]) {
-							leetName[i] = leetObj.numbers.vowels[currLetter];
-						}
-					
-						if (leetObj.numbers.consonants[currLetter]) {
-							leetName[i] = leetObj.numbers.consonants[currLetter];
-						}
-					}
-					break;
-					
-					case 4 :
-					if (leetObj.numbers.vowels[currLetter]) {
-						leetName[i] = leetObj.numbers.vowels[currLetter];
-					}
-					
-					if (leetObj.numbers.consonants[currLetter]) {
-						leetName[i] = leetObj.numbers.consonants[currLetter];
-					}
-					break;
-					
-					case 5 :
-					if (leetObj.symbols.vowels[currLetter]) {
-						leetName[i] = leetObj.symbols.vowels[currLetter][randRange(0, leetObj.symbols.vowels[currLetter].length - 1)];
-					}
-					
-					if (leetObj.symbols.consonants[currLetter]) {
-						leetName[i] = leetObj.symbols.consonants[currLetter][randRange(0, leetObj.symbols.consonants[currLetter].length - 1)];
-					}
-					break;
+				if (leetObj[type][currLetter]) {
+					leetName[i] = leetObj[type][currLetter];
 				}
 			}
 			
@@ -244,7 +174,6 @@
 					case "quu":
 					case "quy":
 					case "cie":
-					case "ylbl":
 					isValid = false;
 					break;
 					
