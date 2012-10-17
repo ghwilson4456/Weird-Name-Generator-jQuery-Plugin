@@ -6,10 +6,10 @@
 			'sound'	: 'random',
 			'size'	: '5',
 			'leet'	: 0
-		}
+		};
 
 		var plugin = this;
-		plugin.settings = {}
+		plugin.settings = {};
 		
 		var vowels = ['a','e','i','o','u','y'];
 		var consonants = ['b','c','d','f','g','h','j','k','l','m','n','p','q','r','s','t','v','w','z'];
@@ -28,8 +28,7 @@
 
 		var init = function() {
 			plugin.settings = $.extend({}, defaults, options);
-			// code goes here
-		}
+		};
 
 		plugin.generate = function(options) {
 			var isConst = true;
@@ -108,7 +107,7 @@
 			} else {
 				return weirdName.join("");
 			}
-		}
+		};
 
 		plugin.leet = function(name, type) {
 			type = type.toLowerCase();
@@ -144,7 +143,7 @@
 					t : "7",
 					z : "2"
 				}
-			}
+			};
 			
 			var leetName = name.split("");
 			var currLetter;
@@ -160,7 +159,7 @@
 			leetName = leetName.join("");
 			
 			return leetName;
-		}
+		};
 
 		var validCombo = function( name, parts ) {
 			var validPart;
@@ -190,14 +189,14 @@
 			} while(!isValid)
 			
 			return validPart;
-		}
+		};
 		
 		var randRange = function(min, max) {
 			return Math.floor(Math.random() * (max - min + 1)) + min;
-		}
+		};
 
 		init();
 
-	}
+	};
 
 })(jQuery);
